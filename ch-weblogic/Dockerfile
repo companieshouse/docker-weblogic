@@ -34,6 +34,9 @@ RUN cd $ORACLE_HOME && \
     $ORACLE_HOME/OPatch/opatch apply -silent && \
     $ORACLE_HOME/OPatch/opatch lsinventory
 
+# Remove coherence extension to avoid runtime errors as we will exclude coherence from the built image
+RUN rm $ORACLE_HOME/wlserver/server/lib/management-services-ext/coherence-management-rest-extension.war
+
 FROM ch-serverjre
 
 ENV ORACLE_HOME=/apps/oracle
