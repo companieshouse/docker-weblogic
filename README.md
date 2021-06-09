@@ -13,9 +13,11 @@ To build the image, from the root of the repo run:
 ## ch-serverjre
 This build extends the ch-oraclelinux image to install the Oracle Java Server JRE 8.  
 
-The JRE needs to be downloaded separately from Oracle, as it is a licensed product, and can be obtained from https://www.oracle.com/java/technologies/javase-server-jre8-downloads.html. Select the Linux 64bit version with a name that follows the pattern `server-jre-8uNNN-linux-x64.tar.gz`, where NNN is the minor version.  The latest version at the time of writing is `server-jre-8u271-linux-x64.tar.gz`
+The JRE needs to be downloaded separately from Oracle, as it is a licensed product, and can be obtained from https://www.oracle.com/java/technologies/javase-server-jre8-downloads.html. Select the Linux 64bit version with a name that follows the pattern `server-jre-8uNNN-linux-x64.tar.gz`, where NNN is the minor version.  The latest version at the time of writing is `server-jre-8u271-linux-x64.tar.gz` 
 
-Place the downloaded JRE inside the `ch-oraclelinux` directory before building.
+Place the downloaded JRE inside the `ch-serverjre` directory before building.
+
+Additional certificates can be imported into the Java trust store, during the build, by placing root or intermediate certificate pem files in the `certs` directory.
 
 To build the image, from the root of the repo run:
 
