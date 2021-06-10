@@ -1,4 +1,4 @@
-FROM ch-serverjre as builder
+FROM 169942020521.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:1.0.0 as builder
 
 ENV ORACLE_HOME=/apps/oracle \
     WL_PKG=fmw_12.2.1.4.0_wls_lite_generic.jar \
@@ -37,7 +37,7 @@ RUN cd $ORACLE_HOME && \
 # Remove coherence extension to avoid runtime errors as we will exclude coherence from the built image
 RUN rm $ORACLE_HOME/wlserver/server/lib/management-services-ext/coherence-management-rest-extension.war
 
-FROM ch-serverjre
+FROM 169942020521.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:1.0.0
 
 ENV ORACLE_HOME=/apps/oracle
 
