@@ -17,7 +17,7 @@ RUN cd /tmp/certs && \
         $JAVA_HOME/bin/keytool -importcert -alias ${CERT_FILE%*.pem} -keystore $JAVA_HOME/jre/lib/security/cacerts -file ${CERT_FILE} -storepass changeit -noprompt; \
     done
 
-FROM ch-oraclelinux
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-oraclelinux:1.0.0
 
 ENV JAVA_HOME=/usr/java/jdk-8 
 ENV PATH $JAVA_HOME/bin:$PATH
