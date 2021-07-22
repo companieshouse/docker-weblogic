@@ -1,4 +1,4 @@
-FROM ch-oraclelinux as builder
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-oraclelinux:1.0.0 as builder
 
 ENV JAVA_PKG=server-jre-8u???-linux-x64.tar.gz \
     JAVA_HOME=/usr/java/jdk-8
