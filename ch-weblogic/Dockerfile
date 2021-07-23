@@ -21,7 +21,7 @@ COPY p${PATCH_NUMBER}_*.zip $ORACLE_HOME
 
 RUN cd $ORACLE_HOME && \
     unzip p${PATCH_NUMBER}_*.zip && \
-    $JAVA_HOME/bin/java -jar 6880880/opatch_generic.jar -silent oracle_home=$ORACLE_HOME
+    $JAVA_HOME/bin/java -jar 6880880/opatch_generic.jar -ignoreSysPrereqs -silent oracle_home=$ORACLE_HOME
 
 # Apply latest patch for WebLogic
 ARG PATCH_NUMBER=32253037
