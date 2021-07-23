@@ -8,7 +8,7 @@ RUN mkdir -p /apps && \
     chmod a+xr /apps && \
     useradd -d $ORACLE_HOME -m -s /bin/bash weblogic
 
-COPY $WL_PKG response.file oraInst.loc /apps
+COPY $WL_PKG response.file oraInst.loc /apps/
 
 # Install WebLogic as the weblogic user
 USER weblogic
