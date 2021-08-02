@@ -1,4 +1,4 @@
-FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:1.1.0 as builder
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:1.2.0 as builder
 
 ENV ORACLE_HOME=/apps/oracle \
     WL_PKG=fmw_12.2.1.4.0_wls_lite_generic.jar \
@@ -23,21 +23,25 @@ RUN cd $ORACLE_HOME && \
     unzip p${PATCH_NUMBER}_*.zip && \
     $JAVA_HOME/bin/java -jar 6880880/opatch_generic.jar -ignoreSysPrereqs -silent oracle_home=$ORACLE_HOME
 
-# Apply latest patch for WebLogic
-ARG PATCH_NUMBER=32253037
+# Apply latest patches for WebLogic
 
-COPY p${PATCH_NUMBER}_*.zip $ORACLE_HOME
+COPY --chown=weblogic weblogic-patches $ORACLE_HOME/weblogic-patches/
 
-RUN cd $ORACLE_HOME && \
-    unzip p${PATCH_NUMBER}_*.zip && \
-    cd ${PATCH_NUMBER} && \
-    $ORACLE_HOME/OPatch/opatch apply -silent && \
-    $ORACLE_HOME/OPatch/opatch lsinventory
+RUN cd $ORACLE_HOME/weblogic-patches && \
+    for PATCH_FILE in $(ls -1 p*.zip); do \
+        PATCH_NUMBER=${PATCH_FILE:1:8}; \
+        unzip p${PATCH_NUMBER}_*.zip && \
+        cd ${PATCH_NUMBER} && \
+        $ORACLE_HOME/OPatch/opatch apply -silent && \
+        $ORACLE_HOME/OPatch/opatch lsinventory && \
+        cd ..; \
+    done
+
 
 # Remove coherence extension to avoid runtime errors as we will exclude coherence from the built image
 RUN rm $ORACLE_HOME/wlserver/server/lib/management-services-ext/coherence-management-rest-extension.war
 
-FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:1.1.0
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:1.2.0
 
 ENV ORACLE_HOME=/apps/oracle
 
