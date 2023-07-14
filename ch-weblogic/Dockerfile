@@ -1,4 +1,4 @@
-FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:1.2.0 as builder
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:1.2.2 as builder
 
 ENV ORACLE_HOME=/apps/oracle \
     WL_PKG=fmw_12.2.1.4.0_wls_lite_generic.jar \
@@ -41,7 +41,7 @@ RUN cd $ORACLE_HOME/weblogic-patches && \
 # Remove coherence extension to avoid runtime errors as we will exclude coherence from the built image
 RUN rm $ORACLE_HOME/wlserver/server/lib/management-services-ext/coherence-management-rest-extension.war
 
-FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:1.2.0
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:1.2.2
 
 ENV ORACLE_HOME=/apps/oracle
 
