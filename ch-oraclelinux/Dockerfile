@@ -1,4 +1,4 @@
-FROM oraclelinux:9
+FROM oraclelinux:8
 
 ENV LANG=en_GB.UTF-8
 
