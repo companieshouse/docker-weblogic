@@ -1,12 +1,13 @@
-FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:1.2.8 as builder
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:2.0.0 AS builder
 
 ENV ORACLE_HOME=/apps/oracle \
-    WL_PKG=fmw_12.2.1.4.0_wls_lite_generic.jar \
+    WL_PKG=fmw_14.1.2.0.0_wls.jar \
     OPATCH_NO_FUSER=true
 
 RUN mkdir -p /apps && \
     chmod a+xr /apps && \
-    useradd -d $ORACLE_HOME -m -s /bin/bash weblogic
+    useradd -d $ORACLE_HOME -m -s /bin/bash weblogic && \
+    yum -y install make
 
 COPY $WL_PKG response.file oraInst.loc /apps/
 
@@ -38,10 +39,7 @@ RUN cd $ORACLE_HOME/weblogic-patches && \
     done
 
 
-# Remove coherence extension to avoid runtime errors as we will exclude coherence from the built image
-RUN rm $ORACLE_HOME/wlserver/server/lib/management-services-ext/coherence-management-rest-extension.war
-
-FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:1.2.8
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:2.0.0
 
 ENV ORACLE_HOME=/apps/oracle
 
@@ -49,15 +47,15 @@ RUN mkdir -p /apps && \
     chmod a+xr /apps && \
     useradd -d $ORACLE_HOME -m -s /bin/bash weblogic
 
+USER weblogic
 COPY --from=builder $ORACLE_HOME/wlserver $ORACLE_HOME/wlserver
 COPY --from=builder $ORACLE_HOME/oracle_common $ORACLE_HOME/oracle_common
 COPY --from=builder $ORACLE_HOME/oraInst.loc $ORACLE_HOME/oraInst.loc
 COPY --from=builder $ORACLE_HOME/inventory $ORACLE_HOME/inventory
+COPY --from=builder $ORACLE_HOME/OPatch $ORACLE_HOME/OPatch
 COPY --from=builder $ORACLE_HOME/oui $ORACLE_HOME/oui
+COPY --from=builder $ORACLE_HOME/jlib $ORACLE_HOME/jlib
+COPY --from=builder $ORACLE_HOME/coherence $ORACLE_HOME/coherence
 
-RUN chown weblogic:weblogic -R /apps
-
-USER weblogic
 WORKDIR $ORACLE_HOME
-
 CMD ["bash"]
