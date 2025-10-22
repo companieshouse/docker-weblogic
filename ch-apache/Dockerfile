@@ -8,7 +8,7 @@ RUN yum -y install gcc && \
     yum -y install make
 
 # Copy over apache and apr source
-COPY *.tar.gz .
+COPY *.tar.gz ./
 
 # Extract source and build
 RUN tar -xzf httpd-2.*.tar.gz && \
