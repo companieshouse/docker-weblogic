@@ -2,7 +2,7 @@
 
 # We want the logs to be stored in exportedlogs/apache instead of just logs
 # This has to be done at run time, as the exportedlogs folder is only mounted at that point
-mkdir -p /usr/local/apache2/exportedlogs/apache
+mkdir -p ${APACHE_HOME}/exportedlogs/apache
 
 
 if [ "${DISABLE_PROXY_SSL}" = true ]; then
@@ -10,4 +10,4 @@ if [ "${DISABLE_PROXY_SSL}" = true ]; then
 fi
 
 # Now start apache
-httpd-foreground
+${APACHE_HOME}/bin/apachectl start -DFOREGROUND
