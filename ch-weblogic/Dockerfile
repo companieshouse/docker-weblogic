@@ -48,14 +48,14 @@ RUN mkdir -p /apps && \
     useradd -d $ORACLE_HOME -m -s /bin/bash weblogic
 
 USER weblogic
-COPY --from=builder $ORACLE_HOME/wlserver $ORACLE_HOME/wlserver
-COPY --from=builder $ORACLE_HOME/oracle_common $ORACLE_HOME/oracle_common
-COPY --from=builder $ORACLE_HOME/oraInst.loc $ORACLE_HOME/oraInst.loc
-COPY --from=builder $ORACLE_HOME/inventory $ORACLE_HOME/inventory
-COPY --from=builder $ORACLE_HOME/OPatch $ORACLE_HOME/OPatch
-COPY --from=builder $ORACLE_HOME/oui $ORACLE_HOME/oui
-COPY --from=builder $ORACLE_HOME/jlib $ORACLE_HOME/jlib
-COPY --from=builder $ORACLE_HOME/coherence $ORACLE_HOME/coherence
+COPY --from=builder --chown=weblogic $ORACLE_HOME/wlserver $ORACLE_HOME/wlserver
+COPY --from=builder --chown=weblogic $ORACLE_HOME/oracle_common $ORACLE_HOME/oracle_common
+COPY --from=builder --chown=weblogic $ORACLE_HOME/oraInst.loc $ORACLE_HOME/oraInst.loc
+COPY --from=builder --chown=weblogic $ORACLE_HOME/inventory $ORACLE_HOME/inventory
+COPY --from=builder --chown=weblogic $ORACLE_HOME/OPatch $ORACLE_HOME/OPatch
+COPY --from=builder --chown=weblogic $ORACLE_HOME/oui $ORACLE_HOME/oui
+COPY --from=builder --chown=weblogic $ORACLE_HOME/jlib $ORACLE_HOME/jlib
+COPY --from=builder --chown=weblogic $ORACLE_HOME/coherence $ORACLE_HOME/coherence
 
 WORKDIR $ORACLE_HOME
 CMD ["bash"]

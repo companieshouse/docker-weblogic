@@ -1,2 +1,2 @@
-inventory_loc=/apps/oracle/.inventory
+inventory_loc=/apps/oracle/inventory
 inst_group=weblogic
