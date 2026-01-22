@@ -1,4 +1,4 @@
-FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:2.0.3 AS builder
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:2.0.4 AS builder
 
 ENV ORACLE_HOME=/apps/oracle \
     WL_PKG=fmw_14.1.2.0.0_wls.jar \
@@ -39,7 +39,7 @@ RUN cd $ORACLE_HOME/weblogic-patches && \
     done
 
 
-FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:2.0.3
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:2.0.4
 
 ENV ORACLE_HOME=/apps/oracle
 
