@@ -21,7 +21,7 @@ RUN tar -xzf httpd-2.*.tar.gz && \
     ./configure --with-included-apr && \
     make install
 
-FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:2.0.0
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-serverjre:2.0.4
 
 ENV APACHE_HOME=/usr/local/apache2
 ENV PLUGINS_HOME=${APACHE_HOME}/modules/WLSPlugin14.1.2.0
