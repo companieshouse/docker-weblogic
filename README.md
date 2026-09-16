@@ -1,5 +1,5 @@
 # docker-weblogic
-Provides builds for ch-oraclelinux, ch-serverjre, ch-weblogic and ch-apache images
+Provides builds for ch-oraclelinux, ch-serverjre, ch-weblogic and ch-apache images.
 
 ## ch-oraclelinux
 This build extends the oracle/oraclelinux:8 image and adds some additional tools, such as vim, less, ps & top.
