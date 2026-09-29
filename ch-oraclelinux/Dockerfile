@@ -1,3 +1,4 @@
+# Pipeline validation change
 FROM oraclelinux:8
 
 ENV LANG=en_GB.UTF-8
