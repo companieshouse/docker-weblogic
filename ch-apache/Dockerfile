@@ -43,7 +43,8 @@ RUN chmod +x bin/start-apache.sh
 RUN sed -i '/mod_rewrite.so$/a LoadModule weblogic_module modules\/WLSPlugin14.1.2.0\/mod_wl_24.so' conf/httpd.conf
 
 # Use a non-root user to run Apache
-RUN useradd -r -s /sbin/nologin apache && \
+RUN groupadd -g 1000 apache && \
+    useradd -r -u 1000 -g 1000 -s /sbin/nologin apache && \
     chown -R apache:apache ${APACHE_HOME}
 USER apache
 CMD ["bin/start-apache.sh"]
