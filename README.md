@@ -56,3 +56,14 @@ To build the image, from the root of the repo run:
 
     docker build -t ch-apache ch-apache/
 
+## chips-openjdk
+This build extends the ch-oraclelinux image to install Open JDK 21.
+
+The JDK is installed via the yum package manager.
+
+Additional certificates can be imported into the Java trust store, during the build, by placing root or intermediate certificate pem files in the `certs` directory.
+
+To build the image, from the root of the repo run:
+
+    docker build -t chips-openjdk chips-openjdk/
+
