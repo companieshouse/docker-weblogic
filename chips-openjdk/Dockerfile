@@ -1,5 +1,4 @@
-# Pipeline validation change
-FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-oraclelinux:2.0.1
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-oraclelinux:2.0.2
 
 # Use fixed JAVA_HOME for consistency with other images
 ENV JAVA_HOME=/usr/java/jdk
