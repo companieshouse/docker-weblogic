@@ -16,7 +16,7 @@ RUN yum -y update-minimal --security && \
 COPY certs /tmp/certs
 RUN cd /tmp/certs && \
     for CERT_FILE in $(ls -1 *.pem); do \
-        $JAVA_HOME/bin/keytool -importcert -alias ${CERT_FILE%*.pem} -keystore ${JAVA_HOME}/lib/security/cacerts -file ${CERT_FILE} -storepass changeit -noprompt; \
+        $JAVA_HOME/bin/keytool -importcert -alias ${CERT_FILE%*.pem} -keystore ${JAVA_HOME}/lib/security/cacerts -file ${CERT_FILE} -storepass changeit -noprompt || exit 1; \
     done && \
     rm -rf /tmp/certs
 
