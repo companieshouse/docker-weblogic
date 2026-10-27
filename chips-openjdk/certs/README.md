@@ -1,4 +1,4 @@
-This certs folder is the location to place any additional x509 certificates that you wish to be added to the CA trust store during the image build.  
+This certs folder is the location to place any additional x509 certificates that you wish to be added to the CA trust store during the image build.  The certificate files should be given a .pem suffix.
 
 In the CH environment, any additional certificates will be placed in the certs folder as part of the Concourse pipeline that builds the image.
 
