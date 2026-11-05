@@ -1,5 +1,5 @@
 # Pipeline validation change
-FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-oraclelinux:2.0.1 AS builder
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-oraclelinux:2.0.3 AS builder
 
 ENV JAVA_PKG=jdk-21-21.?.*_linux-x64_bin.tar.gz \
     JAVA_HOME=/usr/java/jdk
@@ -18,7 +18,7 @@ RUN cd /tmp/certs && \
         $JAVA_HOME/bin/keytool -importcert -alias ${CERT_FILE%*.pem} -keystore $JAVA_HOME/lib/security/cacerts -file ${CERT_FILE} -storepass changeit -noprompt; \
     done
 
-FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-oraclelinux:2.0.1
+FROM 300288021642.dkr.ecr.eu-west-2.amazonaws.com/ch-oraclelinux:2.0.3
 
 ENV JAVA_HOME=/usr/java/jdk
 ENV PATH=$JAVA_HOME/bin:$PATH
